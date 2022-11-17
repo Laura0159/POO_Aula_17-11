@@ -3,7 +3,8 @@ package service;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.net.http.HttpResponse.BodyHandlers;
+import java.net.http.HttpRequest.BodyPublishers;
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,7 +20,13 @@ public class PrevisaoService {
          */
         JSONObject pJSON = new JSONObject();
         pJSON.put("cidade", p.getCidade());
+        HttpRequest req = HttpRequest.newBuilder().
+        POST(BodyPublishers.ofString(pJSON.toString())).
+        uri(URI.create("url oracle")).
+        header("Content-Type", "Aplication/Json").
+        build();
         System.out.println(pJSON);
+
     }
     public void obterPrevisoesWeatherMap(
         String url,
