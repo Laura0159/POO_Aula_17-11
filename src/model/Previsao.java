@@ -15,6 +15,9 @@ public class Previsao {
     private final String cidade; 
     private final String data;
     
+    public Previsao(String cidade){
+        this(0, 0, 0,cidade, null);
+    }
     
    
     }

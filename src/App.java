@@ -14,7 +14,7 @@ public class App {
 
         PrevisaoService service = new PrevisaoService();
         Previsao p = new Previsao("Itu");
-        Service.armazenarPrevisaoNoHistoricoOracleCloud(null);
+        service.armazenarPrevisaoNoHistoricoOracleCloud(p);
 
 
         //service.obterPrevisoesWeatherMap(WEATHER_MAP_BASEURL, WEATHER_MAP_APPID,  "Itu", WEATHER_MAP_UNITS);
