@@ -1,0 +1,50 @@
+package service;
+
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse.BodyHandlers;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import model.Previsao;
+
+public class PrevisaoService {
+    private HttpClient client = HttpClient.newBuilder().build();
+
+    public void armazenarPrevisaoNoHistoricoOracleCloud(Previsao p) throws Exception{
+
+    }
+    public void obterPrevisoesWeatherMap(
+        String url,
+        String appid,
+        String cidade,
+        String units
+     )   throws Exception
+    {
+        url = String.format("%s?q=%s&appid=%s&units=%s", url, cidade, appid, units);
+        //1. Contruir um objeto que represanta a requisição 
+        HttpRequest req = HttpRequest.newBuilder().
+        uri(URI.create(url)).
+        build();
+        //2. Enviar a requisição ao servidor WeatherMap
+        var res = client.send(req, BodyHandlers.ofString());
+        //Sstem.out.println(res.body());
+    
+        //3. Mapeamento Json --> coleçao de objetos Java
+        JSONObject raiz = new JSONObject(res.body());
+        JSONArray list = raiz.getJSONArray("list");
+        for (int i=0; i< list.length(); i++){
+            JSONObject previsaoJSON = list.getJSONObject(i);
+            JSONObject main = previsaoJSON.getJSONObject("main");
+            double temp_min = main.getDouble("temp_min");
+            double temp_max = main.getDouble("temp_max");
+            String dt_txt = previsaoJSON.getString("dt_txt");
+            Previsao p = new Previsao(0, temp_min, temp_max, cidade, dt_txt);
+            System.out.println(p);
+        }
+
+   
+    }
+}
