@@ -14,7 +14,12 @@ public class PrevisaoService {
     private HttpClient client = HttpClient.newBuilder().build();
 
     public void armazenarPrevisaoNoHistoricoOracleCloud(Previsao p) throws Exception{
-
+        /*
+         * ("cidade": "Itu")
+         */
+        JSONObject pJSON = new JSONObject();
+        pJSON.put("cidade", p.getCidade());
+        System.out.println(pJSON);
     }
     public void obterPrevisoesWeatherMap(
         String url,

@@ -13,7 +13,10 @@ public class App {
         final String WEATHER_MAP_UNITS = properties.getProperty("WEATHER_MAP_UNITS");
 
         PrevisaoService service = new PrevisaoService();
+        Previsao p = new Previsao("Itu");
+        Service.armazenarPrevisaoNoHistoricoOracleCloud(null);
 
-        service.obterPrevisoesWeatherMap(WEATHER_MAP_BASEURL, WEATHER_MAP_APPID,  "Itu", WEATHER_MAP_UNITS);
+
+        //service.obterPrevisoesWeatherMap(WEATHER_MAP_BASEURL, WEATHER_MAP_APPID,  "Itu", WEATHER_MAP_UNITS);
     }
 }
